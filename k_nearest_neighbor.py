@@ -97,7 +97,7 @@ class KNearestNeighbor(object):
       # Compute the L2 distance between the i-th test point and all training#
       # points, and store the result in dists[i, :].                        #
       #######################################################################
-     dists[i, :] = np.sqrt(np.sum((self.X_train - X[i]) ** 2, axis=1))
+      dists[i, :] = np.sqrt(np.sum((self.X_train - X[i]) ** 2, axis=1))
       #######################################################################
       #                         END OF YOUR CODE                            #
       #######################################################################
@@ -132,11 +132,9 @@ class KNearestNeighbor(object):
     cross = X @ self.X_train.T                         
     dists = np.sqrt(np.maximum(test_sq - 2 * cross + train_sq, 0))
     return dists
-
     #########################################################################
     #                         END OF YOUR CODE                              #
     #########################################################################
-    return dists
 
   def predict_labels(self, dists, k=1):
     """
@@ -165,12 +163,10 @@ class KNearestNeighbor(object):
       # Hint: Look up the function numpy.argsort.                             #
       #########################################################################
 
-      closedst_indecies=np.argsort(dists[i])[:k]
-      closest_y=self.y_train[closedst_indecies]
-      lables,counts=np.unique(closest_y,return_counts=True)
-      y_pred[i]=lables[np.argmax(counts)]
-    
-    
+      closest_indices = np.argsort(dists[i])[:k]
+      closest_y = self.y_train[closest_indices]
+      labels, counts = np.unique(closest_y, return_counts=True)
+      y_pred[i] = labels[np.argmax(counts)]
 
       #########################################################################
       # TODO:                                                                 #
@@ -179,7 +175,6 @@ class KNearestNeighbor(object):
       # Store this label in y_pred[i]. Break ties by choosing the smaller     #
       # label. Hint: Look up the functions numpy.bincount and numpy.argmax.   #
       #########################################################################
-      pass
       #########################################################################
       #                           END OF YOUR CODE                            # 
       #########################################################################
